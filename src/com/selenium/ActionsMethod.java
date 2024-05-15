@@ -1,11 +1,6 @@
 package com.selenium;
 
 import java.time.Duration;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -16,13 +11,17 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-import junit.framework.Assert;
+
 
 public class ActionsMethod {
-	static WebDriver driver = null;
+	 WebDriver driver = null;
 
-	@Before
+	@BeforeClass
 	public void driverinstance() {
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
@@ -30,13 +29,13 @@ public class ActionsMethod {
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 	}
 
-	@After
+	@AfterClass
 	public void closedriver() {
 		// driver.close();
 		driver.quit();
 	}
 
-	@Test @Ignore
+	@Test
 	public void pause() {
 		try {
 			driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -56,7 +55,7 @@ public class ActionsMethod {
 
 	}
 
-	@Test @Ignore
+	@Test 
 	public void mouseMovement() {
 		try {
 			String baseURL = "https://www.browserstack.com/";
@@ -86,7 +85,7 @@ public class ActionsMethod {
 		}
 	}
 
-	@Test @Ignore
+	@Test
 	public void doubleClick() {
 		
 		try
@@ -98,7 +97,8 @@ public class ActionsMethod {
 
 			WebElement trialaction = driver.findElement(By.xpath("//a[@title='Free Trial']"));
 			a.doubleClick(trialaction).perform();
-		//	Thread.sleep(2000);
+			Thread.sleep(2000);
+			
 			Assert.assertEquals("https://www.browserstack.com/users/sign_up", driver.getCurrentUrl());
 		}catch(Exception e)
 		{
@@ -121,6 +121,7 @@ public class ActionsMethod {
 	        ((RemoteWebDriver) driver).resetInputState();
 
 	        actions.sendKeys("a").perform();
+	      
 	        Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
 	        Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
 	    }
