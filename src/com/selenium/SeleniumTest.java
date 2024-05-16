@@ -3,16 +3,17 @@ package com.selenium;
 import java.time.Duration;
 import java.util.List;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.*;
 
 
 public class SeleniumTest {
 	
-	
+
 	public static void main(String[] args) {
 		WebDriver driver = null;
 		String SubSections="//nav[@class='navPages p-0 m-0 ']//li[starts-with(@class,'navPages-item')]/a[contains(@class,'navPages-action')]";
