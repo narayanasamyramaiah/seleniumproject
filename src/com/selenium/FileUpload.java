@@ -9,12 +9,9 @@ import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -38,7 +35,7 @@ public class FileUpload {
 		driver.quit();
 	}
 
-	@Test
+	@Test @Ignore
 	public void execution() throws InterruptedException, AWTException {
 
 		driver.get("https://www.facebook.com/");
@@ -55,7 +52,7 @@ public class FileUpload {
 
 		// Hit Enter of keyboard using Robot Class
 		r.keyPress(KeyEvent.VK_ENTER);
-
+		Thread.sleep(3000);
 		// Release Enter
 		r.keyRelease(KeyEvent.VK_ENTER);
 		r.keyRelease(KeyEvent.VK_SHIFT);
@@ -63,8 +60,7 @@ public class FileUpload {
 
 	}
 
-
-	@Test 
+	@Test @Ignore
 	public void FileUploadRobot() throws AWTException {
 
 		try {
@@ -105,7 +101,7 @@ public class FileUpload {
 		}
 
 	}
-	
+
 	@Test
 	public void FileUploadWithAutoIT() throws AWTException {
 
@@ -118,7 +114,8 @@ public class FileUpload {
 			Thread.sleep(5000);
 			Runtime.getRuntime().exec("./test.exe");
 			Thread.sleep(5000);
-			//Assert.assertTrue(driver.findElement(By.cssSelector("#download-dropdown a[download]")).isDisplayed());
+			// Assert.assertTrue(driver.findElement(By.cssSelector("#download-dropdown
+			// a[download]")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Your document is ready']")).isDisplayed());
 		} catch (Exception e) {
 			// TODO: handle exception

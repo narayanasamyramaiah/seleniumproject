@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -33,7 +34,7 @@ public class AccessibleTest {
 		options.addArguments("--disable-browser-side-navigation");
 		options.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(options);
-		//driver.get("https://www.selenium.dev/");
+		// driver.get("https://www.selenium.dev/");
 		driver.get("https://www.apple.com/in/accessibility/");
 		driver.manage().window().maximize();
 	}
@@ -45,7 +46,7 @@ public class AccessibleTest {
 		if (violations.length() == 0) {
 			Assert.assertTrue(true, "No violations found");
 		} else {
-			AXE.writeResults("violations/"+method.getName(), responseJSON);
+			AXE.writeResults("violations/" + method.getName(), responseJSON);
 			Reporter.log("# AXE.report(violations)", true);
 			Assert.fail(AXE.report(violations));
 		}
@@ -55,21 +56,39 @@ public class AccessibleTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void amazonAllyTest() throws NumberFormatException, InterruptedException {
 		String URL = "https://www.amazon.com/";
 		driver.get(URL);
-			Thread.sleep(1000);
-			JSONObject responseJSON = new AXE.Builder(driver, scriptUrl).analyze();
-			JSONArray violations = responseJSON.getJSONArray("violations");
-			if (violations.length() == 0) {
-				System.out.println("No violations found");
-			}else {
-				AXE.writeResults("violations/AmazonAllyTest", responseJSON);
-				Assert.assertTrue(false, AXE.report(violations));
-			}
-		
+		Thread.sleep(1000);
+		JSONObject responseJSON = new AXE.Builder(driver, scriptUrl).analyze();
+		JSONArray violations = responseJSON.getJSONArray("violations");
+		if (violations.length() == 0) {
+			System.out.println("No violations found");
+		} else {
+			AXE.writeResults("violations/AmazonAllyTest", responseJSON);
+			Assert.assertTrue(false, AXE.report(violations));
+		}
+
+	}
+
+	@Test
+	public void SleepCountryTest() throws NumberFormatException, InterruptedException {
+		driver.get("https://qa.sleepcountry.ca/");
+		driver.findElement(By.cssSelector("#guestTkn")).sendKeys("8zkxxuq251");
+		driver.findElement(By.xpath("//input[@value='Submit']")).click();
+
+		Thread.sleep(5000);
+		JSONObject responseJSON = new AXE.Builder(driver, scriptUrl).analyze();
+		JSONArray violations = responseJSON.getJSONArray("violations");
+		if (violations.length() == 0) {
+			System.out.println("No violations found");
+		} else {
+			AXE.writeResults("violations/SleepCountryTest", responseJSON);
+			Assert.assertTrue(false, AXE.report(violations));
+		}
+
 	}
 
 	@AfterClass
