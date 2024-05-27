@@ -60,7 +60,7 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.5</version>
 		</dependency>
-		
+
 		<!-- accessibility test axe libraries to use !-->
 		<dependency>
 			<groupId>com.deque.html.axe-core</groupId>
@@ -72,6 +72,13 @@
 			<artifactId>axe-selenium</artifactId>
 			<version>3.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+
 
 	</dependencies>
 </project>
